@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: webshop
+  name: webshop
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: webshop
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: webshop
+    spec:
+      containers:
+      - image: webshop/order-api
+        name: order-api
+        imagePullPolicy: Never
+        env:
+              - name: SPRING_PROFILES_ACTIVE
+                value: "cloud"
+              - name: POSTGRES_USER
+                valueFrom:
+                  configMapKeyRef:
+                    name: postgres-config
+                    key: POSTGRES_USER
+              - name: POSTGRES_PASSWORD
+                valueFrom:
+                  configMapKeyRef:
+                    name: postgres-config
+                    key: POSTGRES_PASSWORD
+              - name: POSTGRES_DB
+                valueFrom:
+                  configMapKeyRef:
+                    name: postgres-config
+                    key: POSTGRES_DB
+
+              - name: POSTGRES_HOST
+                valueFrom:
+                  configMapKeyRef:
+                    name: hostname-config
+                    key: POSTGRES_HOST
+        resources: {}
+status: {}

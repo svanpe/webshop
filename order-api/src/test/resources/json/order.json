@@ -1,0 +1,11 @@
+{
+
+  "customerReference":"ABX777",
+  "orderDate":"2020-05-28 08:57:22",
+  "orderLines": [
+    {
+      "productReference":"BROL437QPA",
+      "quantity":5
+    }
+  ]
+}
