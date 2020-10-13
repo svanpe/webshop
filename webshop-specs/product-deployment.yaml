@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: product-api
+  name: product-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: product-api
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: product-api
+    spec:
+      containers:
+      - image: webshop/product-api
+        name: product-api
+        imagePullPolicy: Never
+        env:
+              - name: SPRING_PROFILES_ACTIVE
+                value: "cloud"
+
+        resources: {}
+status: {}

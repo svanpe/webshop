@@ -40,10 +40,5 @@ spec:
                     name: postgres-config
                     key: POSTGRES_DB
 
-              - name: POSTGRES_HOST
-                valueFrom:
-                  configMapKeyRef:
-                    name: hostname-config
-                    key: POSTGRES_HOST
         resources: {}
 status: {}

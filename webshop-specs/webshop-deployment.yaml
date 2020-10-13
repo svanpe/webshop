@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: webshop-fronted
+  name: webshop-fronted
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: webshop-fronted
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: webshop-fronted
+    spec:
+      containers:
+      - image: webshop/webshop-vue
+        name: webshop-fronted
+        imagePullPolicy: Never
+        
+        resources: {}
+status: {}
