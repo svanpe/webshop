@@ -3,19 +3,19 @@ kind: Deployment
 metadata:
   creationTimestamp: null
   labels:
-    app: webshop
-  name: webshop
+    app: order-api
+  name: order-api
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: webshop
+      app: order-api
   strategy: {}
   template:
     metadata:
       creationTimestamp: null
       labels:
-        app: webshop
+        app: order-api
     spec:
       containers:
       - image: webshop/order-api

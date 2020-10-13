@@ -3,8 +3,8 @@ kind: Service
 metadata:
   creationTimestamp: null
   labels:
-    app: webshop
-  name: webshop
+    app: order-api
+  name: order-api
 spec:
   ports:
   - name: 8080-8080
@@ -12,7 +12,5 @@ spec:
     protocol: TCP
     targetPort: 8080
   selector:
-    app: webshop
-  type: ClusterIP
-status:
-  loadBalancer: {}
+    app: order-api
+  type: LoadBalancer
