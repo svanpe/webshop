@@ -4,6 +4,8 @@ This is a trial for training purpose about making an app with spring-boot for RE
 I found a lot of support from the following projects found on the web :
 
 https://github.com/mkjelland/spring-boot-postgres-on-k8s-sample
+https://github.com/tudordascalu/Vue-Webshop
+
 
 demo with a rest API implementation with spring-boot fmk, how to configure a database with kubernetes
 
