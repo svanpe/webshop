@@ -1,7 +1,9 @@
-# webshop
-trial for using spring-boot, rest api and kubernetes
+# Webshop (POC)
+This is a trial for training purpose about making an app with spring-boot for REST api's and Kubernetes.
 
-see also https://github.com/mkjelland/spring-boot-postgres-on-k8s-sample
+I found a lot of support from the following projects found on the web :
+
+https://github.com/mkjelland/spring-boot-postgres-on-k8s-sample
 
 demo with a rest API implementation with spring-boot fmk, how to configure a database with kubernetes
 
