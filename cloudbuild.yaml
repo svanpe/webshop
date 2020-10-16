@@ -1,6 +1,6 @@
 steps:
 - name: 'gcr.io/cloud-builders/mvn'
-  args: ['clean','package', '-f order-api/pom.xml']
+  args: ['clean','package', '-forder-api/pom.xml']
 - name: 'gcr.io/cloud-builders/docker'
   args: ['build', '--tag=gcr.io/webshop/order-api:V1', './order-api']
 images: ['gcr.io/webshop/order-api']
