@@ -5,8 +5,10 @@ I found a lot of support from the following projects found on the web :
 
 https://github.com/mkjelland/spring-boot-postgres-on-k8s-sample
 https://github.com/tudordascalu/Vue-Webshop
+https://cloud.google.com/kubernetes-engine/docs/tutorials/gitops-cloud-build
 
 
+# LOCAL DEMO
 demo with a rest API implementation with spring-boot fmk, how to configure a database with kubernetes
 
 1) build image webshop/order-api
@@ -34,7 +36,8 @@ kubectl logs deployment/webshop
 
 4)enjoy with the postman collection in the /order-api/src/tests/postman directory
 
-
+# ON GOOGLE CLOUD
+gcloud container clusters create webshop-demo --num-nodes 1 --zone us-central1-b
 
 
 
