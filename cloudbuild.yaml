@@ -15,10 +15,10 @@ steps:
   id: 'build product db image'
   args: ['build', '--tag=gcr.io/$PROJECT_ID/product-db:$SHORT_SHA', './product-db']
 - name: 'gcr.io/cloud-builders/docker'
-  id: 'build product view image'
-  args: ['build', '--tag=gcr.io/$PROJECT_ID/webshop-view:$SHORT_SHA', './webshop-view']
+  id: 'build webshop view image'
+  args: ['build', '--tag=gcr.io/$PROJECT_ID/webshop-vue:$SHORT_SHA', './webshop-vue']
 images: 
 - 'gcr.io/$PROJECT_ID/order-api:$SHORT_SHA'
 - 'gcr.io/$PROJECT_ID/product-api:$SHORT_SHA'
 - 'gcr.io/$PROJECT_ID/product-db:$SHORT_SHA'
-- 'gcr.io/$PROJECT_ID/webshop-view:$SHORT_SHA'
+- 'gcr.io/$PROJECT_ID/webshop-vue:$SHORT_SHA'
