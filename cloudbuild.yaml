@@ -26,7 +26,7 @@ steps:
     gcloud source repos clone webshop-env && \
     cd webshop-env && \
     git checkout candidate && \
-    git config user.email $(gcloud auth list --filter=status:ACTIVE --format='value(account)') && \
+    git config user.email "svanpe@gmail.com" && \
     git config user.name "svanpe"
 
 - name: 'gcr.io/cloud-builders/gcloud'
@@ -47,7 +47,7 @@ steps:
   - |
      set -x && \
      cd webshop-env && \
-     git config user.email $(gcloud auth list --filter=status:ACTIVE --format='value(account)') && \
+     git config user.email "svanpe@gmail.com" && \
      git config user.name "svanpe" && \
      git add webshop.yaml && \
      git commit -m "Deploying new image" && \
