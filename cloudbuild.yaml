@@ -23,7 +23,7 @@ steps:
   args:
   - '-c'
   - |
-    git clone https://github.com/svanpe/webshop-env.git && \
+    gcloud source repos clone webshop-env && \
     cd webshop-env && \
     git checkout candidate && \
     git config user.email $(gcloud auth list --filter=status:ACTIVE --format='value(account)')
