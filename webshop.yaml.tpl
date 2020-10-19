@@ -20,11 +20,10 @@ spec:
       containers:
       - image: CLOUD_REP/CLOUD_PROJECT/webshop-vue:COMMIT_SHA
         name: webshop-fronted
-        imagePullPolicy: Never
+        imagePullPolicy: IfNotPresent
         
         resources: {}
------------------------------
-
+---
 apiVersion: v1
 kind: Service
 metadata:
