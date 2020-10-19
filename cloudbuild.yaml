@@ -1,6 +1,24 @@
 steps:
 - name: 'gcr.io/cloud-builders/mvn'
-  args: ['clean','package', '-forder-api/pom.xml']
+  id: 'build order api'
+  args: ['clean','package','-forder-api/pom.xml']
 - name: 'gcr.io/cloud-builders/docker'
-  args: ['build', '--tag=gcr.io/sanguine-form-292516/order-api:V1', './order-api']
-images: ['gcr.io/sanguine-form-292516/order-api']
+  id: 'build order api image'
+  args: ['build', '--tag=gcr.io/$PROJECT_ID/order-api:$SHORT_SHA', './order-api']
+- name: 'gcr.io/cloud-builders/mvn'
+  id: 'build product api'
+  args: ['clean','package', '-fproduct-api/pom.xml']
+- name: 'gcr.io/cloud-builders/docker'
+  id: 'build product api image'
+  args: ['build', '--tag=gcr.io/$PROJECT_ID/product-api:$SHORT_SHA', './product-api']
+- name: 'gcr.io/cloud-builders/docker'
+  id: 'build product db image'
+  args: ['build', '--tag=gcr.io/$PROJECT_ID/product-db:$SHORT_SHA', './product-db']
+- name: 'gcr.io/cloud-builders/docker'
+  id: 'build product view image'
+  args: ['build', '--tag=gcr.io/$PROJECT_ID/product-view:$SHORT_SHA', './product-view']
+images: 
+- 'gcr.io/$PROJECT_ID/order-api:$SHORT_SHA'
+- 'gcr.io/$PROJECT_ID/product-api:$SHORT_SHA'
+- 'gcr.io/$PROJECT_ID/product-db:$SHORT_SHA'
+- 'gcr.io/$PROJECT_ID/product-api:$SHORT_SHA'
