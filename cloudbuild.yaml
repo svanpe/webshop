@@ -48,7 +48,7 @@ steps:
     set -x && \
     cd webshop-env && \
     git add webshop.yaml && \
-    git commit -m "Deploying image gcr.io/${PROJECT_ID}/webshop-vue:${SHORT_SHA} Built from commit ${COMMIT_SHA} of repository webshop  Author: $(git log --format='%an <%ae>' -n 1 HEAD)" && \
+    git commit -m "Deploying image gcr.io/${PROJECT_ID}/webshop-vue:${SHORT_SHA}" && \
     git push origin candidate
  images: 
 - 'gcr.io/$PROJECT_ID/order-api:$SHORT_SHA'
