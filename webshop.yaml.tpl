@@ -18,7 +18,7 @@ spec:
         app: webshop-fronted
     spec:
       containers:
-      - image: CLOUD_REP/CLOUD_PROJECT/webshop-vue:COMMIT_SHA
+      - image: /CLOUD_REP/CLOUD_PROJECT/webshop-vue:COMMIT_SHA
         name: webshop-fronted
         imagePullPolicy: IfNotPresent
         
