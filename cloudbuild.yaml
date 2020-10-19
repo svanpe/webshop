@@ -17,7 +17,42 @@ steps:
 - name: 'gcr.io/cloud-builders/docker'
   id: 'build webshop view image'
   args: ['build', '--tag=gcr.io/$PROJECT_ID/webshop-vue:$SHORT_SHA', './webshop-vue']
-images: 
+- name: 'gcr.io/cloud-builders/gcloud'
+  id: Clone env repository
+  entrypoint: /bin/sh
+  args:
+  - '-c'
+  - |
+    git clone https://github.com/svanpe/webshop-env.git && \
+    cd webshop-env && \
+    git checkout candidate && \
+    git config user.email $(gcloud auth list --filter=status:ACTIVE --format='value(account)')
+
+# This step generates the new manifest
+- name: 'gcr.io/cloud-builders/gcloud'
+  id: Generate manifest
+  entrypoint: /bin/sh
+  args:
+  - '-c'
+  - |
+     sed "s/CLOUD_REP/gcr.io/g" webshop.yaml.tpl | \
+     sed "s/CLOUD_PROJECT/${PROJECT_ID}/g" webshop.yaml.tpl | \
+     sed "s/COMMIT_SHA/${SHORT_SHA}/g" > webshop-env/webshop.yaml
+# This step pushes the manifest back to webshop-env
+- name: 'gcr.io/cloud-builders/gcloud'
+  id: Push manifest
+  entrypoint: /bin/sh
+  args:
+  - '-c'
+  - |
+    set -x && \
+    cd webshop-env && \
+    git add webshop.yaml && \
+    git commit -m "Deploying image gcr.io/${PROJECT_ID}/webshop-vue:${SHORT_SHA}
+    Built from commit ${COMMIT_SHA} of repository webshop
+    Author: $(git log --format='%an <%ae>' -n 1 HEAD)" && \
+    git push origin candidate
+ images: 
 - 'gcr.io/$PROJECT_ID/order-api:$SHORT_SHA'
 - 'gcr.io/$PROJECT_ID/product-api:$SHORT_SHA'
 - 'gcr.io/$PROJECT_ID/product-db:$SHORT_SHA'
