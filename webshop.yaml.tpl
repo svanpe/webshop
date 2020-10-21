@@ -68,7 +68,7 @@ spec:
     spec:
       containers:
         - name: postgres
-          image: marketplace.gcr.io/google/postgresql10:latest
+          image: marketplace.gcr.io/google/postgresql:9.6
           imagePullPolicy: "IfNotPresent"
           ports:
             - containerPort: 5432
@@ -122,7 +122,7 @@ spec:
       containers:
       - image: gcr.io/CLOUD_PROJECT/order-api:COMMIT_SHA
         name: order-api
-        imagePullPolicy: Never
+        imagePullPolicy: IfNotPresent
         env:
               - name: SPRING_PROFILES_ACTIVE
                 value: "cloud"
