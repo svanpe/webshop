@@ -68,7 +68,7 @@ spec:
     spec:
       containers:
         - name: postgres
-          image: CLOUD_REP/postgres:10.4
+          image: marketplace.gcr.io/google/postgresql10:latest
           imagePullPolicy: "IfNotPresent"
           ports:
             - containerPort: 5432
@@ -120,7 +120,7 @@ spec:
         app: order-api
     spec:
       containers:
-      - image: CLOUD_REP/CLOUD_PROJECT/order-api:COMMIT_SHA
+      - image: gcr.io/CLOUD_PROJECT/order-api:COMMIT_SHA
         name: order-api
         imagePullPolicy: Never
         env:
@@ -145,102 +145,6 @@ spec:
         resources: {}
 status: {}
 ---
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: mongo-pvc
-spec:
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 256Mi
----
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: mongo
-spec:
-  selector:
-    matchLabels:
-      app: mongo
-  template:
-    metadata:
-      labels:
-        app: mongo
-    spec:
-      containers:
-        - name: productdb
-          image: CLOUD_REP/CLOUD_PROJECT/productdb:COMMIT_SHA
-          imagePullPolicy: Never
-          ports:
-            - containerPort: 27017
-          volumeMounts:
-            - name: storage
-              mountPath: /data/db
-      volumes:
-        - name: storage
-          persistentVolumeClaim:
-            claimName: mongo-pvc
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: mongo
-spec:
-  selector:
-    app: mongo
-  ports:
-    - port: 27017
-      targetPort: 27017
----
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  creationTimestamp: null
-  labels:
-    app: product-api
-  name: product-api
-spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: product-api
-  strategy: {}
-  template:
-    metadata:
-      creationTimestamp: null
-      labels:
-        app: product-api
-    spec:
-      containers:
-      - image: CLOUD_REP/CLOUD_PROJECT/product-api:COMMIT_SHA
-        name: product-api
-        imagePullPolicy: Never
-        env:
-              - name: SPRING_PROFILES_ACTIVE
-                value: "cloud"
-
-        resources: {}
-status: {}
----
-apiVersion: v1
-kind: Service
-metadata:
-  creationTimestamp: null
-  labels:
-    app: product-api
-  name: product-api
-spec:
-  ports:
-  - name: 8050-8050
-    port: 8050
-    protocol: TCP
-    targetPort: 8050
-  selector:
-    app: product-api
-  type: LoadBalancer
----
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -261,7 +165,7 @@ spec:
         app: webshop-fronted
     spec:
       containers:
-      - image: CLOUD_REP/CLOUD_PROJECT/webshop-vue:COMMIT_SHA
+      - image: gcr.io/CLOUD_PROJECT/webshop-vue:COMMIT_SHA
         name: webshop-fronted
         imagePullPolicy: IfNotPresent
         
