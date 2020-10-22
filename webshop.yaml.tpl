@@ -45,7 +45,7 @@ metadata:
   labels:
     app: postgres
 spec:
-  storageClassName: standard
+  storageClassName: manual
   accessModes:
     - ReadWriteMany
   resources:
@@ -188,36 +188,5 @@ spec:
     app: webshop-fronted
     
   type: LoadBalancer
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: simple-fanout-example
-  annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /
-spec:
-  rules:
-  - http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name:  webshop-fronted
-            port:
-              number: 9090
-      - path: /product
-        pathType: Prefix
-        backend:
-          service:
-            name: product-api
-            port:
-              number: 8050
-      - path: /order
-        pathType: Prefix
-        backend:
-          service:
-            name: order-api
-            port:
-              number: 8080
+
               
