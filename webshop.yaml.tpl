@@ -69,7 +69,7 @@ spec:
       containers:
         - name: postgres
           image: marketplace.gcr.io/google/postgresql:9.6
-          imagePullPolicy: "IfNotPresent"
+          imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 5432
           envFrom:
