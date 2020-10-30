@@ -79,10 +79,10 @@ spec:
           volumeMounts:
             - mountPath: /var/lib/postgresql/data
               name: postgredb
-      resources:
-        - requests:
-            cpu: 100m
-            memory: 100Mi
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "100Mi"
         
       volumes:
         - name: postgredb
