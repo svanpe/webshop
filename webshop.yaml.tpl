@@ -5,6 +5,7 @@ metadata:
   labels:
     app: postgres
 data:
+  PGDATA: /var/lib/postgresql/data/pgdata
   POSTGRES_DB: orderdb
   POSTGRES_USER: postgres
   POSTGRES_PASSWORD: postgresdb
@@ -34,9 +35,9 @@ spec:
   capacity:
     storage: 5Gi
   accessModes:
-    - ReadWriteMany
+    - ReadWriteOnce
   hostPath:
-    path: "/mnt/data"
+    path: "/var/lib/postgresql/data"
 ---
 kind: PersistentVolumeClaim
 apiVersion: v1
@@ -47,7 +48,7 @@ metadata:
 spec:
   storageClassName: standard
   accessModes:
-    - ReadWriteMany
+    - ReadWriteOnce
   resources:
     requests:
       storage: 5Gi
@@ -68,8 +69,8 @@ spec:
     spec:
       containers:
         - name: postgres
-          image: marketplace.gcr.io/google/postgresql:9.6
-          imagePullPolicy: IfNotPresent
+          image: gcr.io/cloud-marketplace/google/postgresql:9.6.19-20201025-141411
+          imagePullPolicy: Always
           ports:
             - containerPort: 5432
           envFrom:
@@ -78,6 +79,11 @@ spec:
           volumeMounts:
             - mountPath: /var/lib/postgresql/data
               name: postgredb
+      resources:
+        - requests:
+            cpu: 100m
+            memory: 100Mi
+        
       volumes:
         - name: postgredb
           persistentVolumeClaim:
