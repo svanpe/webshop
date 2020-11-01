@@ -1,6 +1,8 @@
 package be.svanpe.api.order;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import org.hibernate.annotations.Type;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -15,11 +17,13 @@ public class Order {
     @Column(name = "id")
     private long id;
 
-    @Column(name = "customerReference")
+    @Column(name = "customerreference")
     private String customerReference;
 
-    @Column(name = "orderDate")
+//    @Column(name = "orderdate", columnDefinition = "TIMESTAMP")
+//    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
+    @Transient
     private LocalDateTime orderDate;
 
     @Column(name = "status")

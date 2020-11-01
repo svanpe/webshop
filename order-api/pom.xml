@@ -16,6 +16,7 @@
 
 	<properties>
 		<java.version>11</java.version>
+		<hibernate.version>5.2.12.Final</hibernate.version>
 	</properties>
 
 	<dependencies>
@@ -27,6 +28,7 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-rest</artifactId>
 		</dependency>
+
 
 		<!-- https://mvnrepository.com/artifact/org.flywaydb/flyway-core -->
 		<dependency>

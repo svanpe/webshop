@@ -11,17 +11,17 @@ public class OrderLine {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     private Long id;
-    @Column(name = "productReference")
+    @Column(name = "productreference")
     private String productReference;
     @Column(name = "quantity")
     private Long quantity;
-    @Column(name = "taxPercentage")
+    @Column(name = "taxpercentage")
     private BigDecimal taxPercentage;
-    @Column(name = "unitPrice")
+    @Column(name = "unitprice")
     private BigDecimal unitPrice;
-    @Column(name = "unitPriceAndTax")
+    @Column(name = "unitpriceandtax")
     private BigDecimal unitPriceAndTax;
-    @Column(name = "totalPriceAndTax")
+    @Column(name = "totalpriceandtax")
     private BigDecimal totalPriceAndTax;
 
     public Long getId() {
