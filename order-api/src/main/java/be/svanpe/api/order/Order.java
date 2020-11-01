@@ -12,19 +12,24 @@ public class Order {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
     private long id;
 
+    @Column(name = "customerReference")
     private String customerReference;
 
+    @Column(name = "orderDate")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime orderDate;
+
+    @Column(name = "status")
     private OrderStatus status;
 
     @OneToMany(
             cascade = CascadeType.ALL,
             orphanRemoval = true
     )
-    private List<OrderLine> orderLines;
+   private List<OrderLine> orderLines;
 
     public long getId() {
         return id;

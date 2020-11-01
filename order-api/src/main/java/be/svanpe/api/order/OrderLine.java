@@ -9,12 +9,19 @@ public class OrderLine {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
     private Long id;
+    @Column(name = "productReference")
     private String productReference;
+    @Column(name = "quantity")
     private Long quantity;
+    @Column(name = "taxPercentage")
     private BigDecimal taxPercentage;
+    @Column(name = "unitPrice")
     private BigDecimal unitPrice;
+    @Column(name = "unitPriceAndTax")
     private BigDecimal unitPriceAndTax;
+    @Column(name = "totalPriceAndTax")
     private BigDecimal totalPriceAndTax;
 
     public Long getId() {
