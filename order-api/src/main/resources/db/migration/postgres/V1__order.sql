@@ -17,7 +17,7 @@
         primary key (id)
     );
 
-    create table if not exists order_tb_order_line (
+    create table if not exists order_tb_order_lines (
         order_tb_id int8 not null,
         orderLines_id int8 not null,
         unique (orderLines_id)
@@ -25,12 +25,12 @@
 
 
 
-    alter table order_tb_order_line
+    alter table order_tb_order_lines
         add constraint FK74BDF7683F84CE59
         foreign key (orderLines_id)
         references order_line_tb;
 
-    alter table order_tb_order_line
+    alter table order_tb_order_lines
         add constraint FK74BDF768BFAA0CF7
         foreign key (order_tb_id)
         references order_tb;
