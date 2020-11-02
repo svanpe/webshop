@@ -19,15 +19,15 @@
 
     create table if not exists order_tb_order_lines (
         order_id int8 not null,
-        orderLines_id int8 not null,
-        unique (orderLines_id)
+        order_lines_id int8 not null,
+        unique (order_lines_id)
     );
 
 
 
     alter table order_tb_order_lines
         add constraint FK74BDF7683F84CE59
-        foreign key (orderLines_id)
+        foreign key (order_lines_id)
         references order_line_tb;
 
     alter table order_tb_order_lines
