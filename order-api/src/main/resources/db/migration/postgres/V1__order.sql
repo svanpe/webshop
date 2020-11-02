@@ -18,7 +18,7 @@
     );
 
     create table if not exists order_tb_order_lines (
-        order_tb_id int8 not null,
+        order_id int8 not null,
         orderLines_id int8 not null,
         unique (orderLines_id)
     );
@@ -32,7 +32,7 @@
 
     alter table order_tb_order_lines
         add constraint FK74BDF768BFAA0CF7
-        foreign key (order_tb_id)
+        foreign key (order_id)
         references order_tb;
 
     create sequence if not exists hibernate_sequence;
