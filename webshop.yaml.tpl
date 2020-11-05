@@ -194,5 +194,24 @@ spec:
     app: webshop-fronted
     
   type: LoadBalancer
-
-              
+---
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: webshop-ing
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    kubernetes.io/ingress.global-static-ip-name: "web-static-ip"
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /*
+        backend:
+          serviceName: webshop-fronted
+          servicePort: 9090
+      - path: /api/*
+        backend:
+          serviceName: order-api
+          servicePort: 8080        
