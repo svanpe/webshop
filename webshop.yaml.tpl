@@ -207,7 +207,7 @@ spec:
   rules:
   - http:
       paths:
-      - path: (/|$)(.*)
+      - path: /
         backend:
           serviceName: webshop-fronted
           servicePort: 9090
