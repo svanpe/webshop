@@ -202,16 +202,16 @@ metadata:
   annotations:
     kubernetes.io/ingress.class: nginx
     kubernetes.io/ingress.global-static-ip-name: "web-static-ip"
-    nginx.ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
 spec:
   rules:
   - http:
       paths:
-      - path: /*
+      - path: (/|$)(.*)
         backend:
           serviceName: webshop-fronted
           servicePort: 9090
-      - path: /api/*
+      - path: /api(/|$)(.*)
         backend:
           serviceName: order-api
           servicePort: 8080        
