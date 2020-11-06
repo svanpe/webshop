@@ -37,12 +37,15 @@ kubectl logs deployment/webshop
 4)enjoy with the postman collection in the /order-api/src/tests/postman directory
 
 # ON GOOGLE CLOUD
+
+install INGRESS 
 gcloud container clusters create webshop-demo --num-nodes 1 --zone us-central1-b
 
+kubectl create clusterrolebinding cluster-admin-binding --clusterrole cluster-admin --user $(gcloud config get-value account)
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/nginx-0.30.0/deploy/static/mandatory.yaml
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/nginx-0.30.0/deploy/static/provider/cloud-generic.yaml
 
-
-
-
+gcloud compute addresses create web-static-ip --global
 
 
 
