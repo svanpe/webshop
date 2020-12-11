@@ -5,6 +5,9 @@ steps:
 - name: 'gcr.io/cloud-builders/docker'
   id: 'build order api image'
   args: ['build', '--tag=gcr.io/$PROJECT_ID/order-api:$SHORT_SHA', './order-api']
+- name: 'gcr.io/cloud-builders/mvn'
+  id: 'build frontend app'
+  args: ['clean','package','-fwebshop-front/pom.xml']
 - name: 'gcr.io/cloud-builders/docker'
   id: 'build frontend mvc image'
   args: ['build', '--tag=gcr.io/$PROJECT_ID/webshop-front:$SHORT_SHA', './webshop-front']
