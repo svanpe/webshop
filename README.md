@@ -27,7 +27,7 @@ kubectl create -f postgres-service.yaml
 kubectl create -f order-deployment.yaml
 kubectl create -f order-service.yaml
 
-
+ 
 kubectl get all 
 'kubectl create configmap hostname-config --from-literal=POSTGRES_HOST="ipaddress:5432"
 
