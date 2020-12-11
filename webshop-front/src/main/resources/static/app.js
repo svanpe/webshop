@@ -1,6 +1,6 @@
 $(document).ready(function() {
     $.ajax({
-        url: "http://localhost:8080/orders?customerReference=ABX777"
+        url: "/api/orders?customerReference=ABX777"
     }).then(function(data) {
 
         data.forEach(function (order) {
