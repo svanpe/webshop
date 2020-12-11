@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: frontend-mvc
+  name: frontend-mvc
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: frontend-mvc
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: frontend-mvc
+    spec:
+      containers:
+      - image: webshop/webshop-front
+        name: order-api
+        imagePullPolicy: Never
+        env:
+              - name: SPRING_PROFILES_ACTIVE
+                value: "cloud"
+     
+
+        resources: {}
+status: {}
