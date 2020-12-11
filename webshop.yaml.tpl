@@ -114,7 +114,7 @@ metadata:
     app: order-api
   name: order-api
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: order-api
@@ -148,6 +148,54 @@ spec:
                     name: postgres-config
                     key: POSTGRES_DB
 
+        resources: {}
+status: {}
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    app: frontend-mvc
+  name: frontend-mvc
+spec:
+  ports:
+  - name: 8075-8075
+    port: 8075
+    protocol: TCP
+    targetPort: 8075
+  selector:
+    app: frontend-mvc
+  type: LoadBalancer
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: frontend-mvc
+  name: frontend-mvc
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: frontend-mvc
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: frontend-mvc
+    spec:
+      containers:
+      - image: gcr.io/CLOUD_PROJECT/webshop-front:COMMIT_SHA
+        name: webshop-front
+        imagePullPolicy: IfNotPresent
+        env:
+              - name: SPRING_PROFILES_ACTIVE
+                value: "cloud"
+   
         resources: {}
 status: {}
 ---
@@ -194,53 +242,6 @@ spec:
     app: webshop-vue
     
   type: LoadBalancer
----
-apiVersion: v1
-kind: Service
-metadata:
-  creationTimestamp: null
-  labels:
-    app: frontend-mvc
-  name: frontend-mvc
-spec:
-  ports:
-  - name: 8075-8075
-    port: 8075
-    protocol: TCP
-    targetPort: 8075
-  selector:
-    app: frontend-mvc
-  type: LoadBalancer
----
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  creationTimestamp: null
-  labels:
-    app: frontend-mvc
-  name: frontend-mvc
-spec:
-  replicas: 2
-  selector:
-    matchLabels:
-      app: frontend-mvc
-  strategy: {}
-  template:
-    metadata:
-      creationTimestamp: null
-      labels:
-        app: frontend-mvc
-    spec:
-      containers:
-      - image: gcr.io/CLOUD_PROJECT/webshop-front:COMMIT_SHA
-        name: webshop-front
-        imagePullPolicy: IfNotPresent
-        env:
-              - name: SPRING_PROFILES_ACTIVE
-                value: "cloud"
-   
-        resources: {}
-status: {}
 ---
 apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
