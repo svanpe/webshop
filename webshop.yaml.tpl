@@ -114,7 +114,7 @@ metadata:
     app: order-api
   name: order-api
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       app: order-api
@@ -220,7 +220,7 @@ metadata:
     app: frontend-mvc
   name: frontend-mvc
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       app: frontend-mvc
@@ -233,7 +233,7 @@ spec:
     spec:
       containers:
       - image: gcr.io/CLOUD_PROJECT/webshop-front:COMMIT_SHA
-        name: frontend-mvc
+        name: webshop-front
         imagePullPolicy: IfNotPresent
         env:
               - name: SPRING_PROFILES_ACTIVE
