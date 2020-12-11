@@ -12,7 +12,7 @@ https://cloud.google.com/kubernetes-engine/docs/tutorials/gitops-cloud-build
 demo with a rest API implementation with spring-boot fmk, how to configure a database with kubernetes
 
 1) build image webshop/order-api
-
+ 
 cd /order-api
 mvn clean install
 mvn spring-boot:build-image
