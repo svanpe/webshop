@@ -156,23 +156,23 @@ kind: Deployment
 metadata:
   creationTimestamp: null
   labels:
-    app: webshop-fronted
-  name: webshop-fronted
+    app: webshop-vue
+  name: webshop-vue
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: webshop-fronted
+      app: webshop-vue
   strategy: {}
   template:
     metadata:
       creationTimestamp: null
       labels:
-        app: webshop-fronted
+        app: webshop-vue
     spec:
       containers:
       - image: gcr.io/CLOUD_PROJECT/webshop-vue:COMMIT_SHA
-        name: webshop-fronted
+        name: webshop-vue
         imagePullPolicy: IfNotPresent
         
         resources: {}
@@ -182,8 +182,8 @@ kind: Service
 metadata:
   creationTimestamp: null
   labels:
-    app: webshop-fronted
-  name: webshop-fronted
+    app: webshop-vue
+  name: webshop-vue
 spec:
   ports:
   - name: 9090-9090
@@ -191,9 +191,56 @@ spec:
     protocol: TCP
     targetPort: 80
   selector:
-    app: webshop-fronted
+    app: webshop-vue
     
   type: LoadBalancer
+---
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    app: frontend-mvc
+  name: frontend-mvc
+spec:
+  ports:
+  - name: 8075-8075
+    port: 8075
+    protocol: TCP
+    targetPort: 8075
+  selector:
+    app: frontend-mvc
+  type: LoadBalancer
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: frontend-mvc
+  name: frontend-mvc
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: frontend-mvc
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: frontend-mvc
+    spec:
+      containers:
+      - image: gcr.io/CLOUD_PROJECT/webshop-front:COMMIT_SHA
+        name: frontend-mvc
+        imagePullPolicy: IfNotPresent
+        env:
+              - name: SPRING_PROFILES_ACTIVE
+                value: "cloud"
+   
+        resources: {}
+status: {}
 ---
 apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
@@ -209,8 +256,8 @@ spec:
       paths:
       - path: /
         backend:
-          serviceName: webshop-fronted
-          servicePort: 9090
+          serviceName: frontend-mvc
+          servicePort: 8075
 ---
 apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
