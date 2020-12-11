@@ -5,15 +5,9 @@ steps:
 - name: 'gcr.io/cloud-builders/docker'
   id: 'build order api image'
   args: ['build', '--tag=gcr.io/$PROJECT_ID/order-api:$SHORT_SHA', './order-api']
-- name: 'gcr.io/cloud-builders/mvn'
-  id: 'build product api'
-  args: ['clean','package', '-fproduct-api/pom.xml']
 - name: 'gcr.io/cloud-builders/docker'
-  id: 'build product api image'
-  args: ['build', '--tag=gcr.io/$PROJECT_ID/product-api:$SHORT_SHA', './product-api']
-- name: 'gcr.io/cloud-builders/docker'
-  id: 'build product db image'
-  args: ['build', '--tag=gcr.io/$PROJECT_ID/product-db:$SHORT_SHA', './product-db']
+  id: 'build frontend mvc image'
+  args: ['build', '--tag=gcr.io/$PROJECT_ID/webshop-front:$SHORT_SHA', './webshop-front']
 - name: 'gcr.io/cloud-builders/docker'
   id: 'build webshop view image'
   args: ['build', '--tag=gcr.io/$PROJECT_ID/webshop-vue:$SHORT_SHA', './webshop-vue']
@@ -53,6 +47,5 @@ steps:
 
 images: 
 - 'gcr.io/$PROJECT_ID/order-api:$SHORT_SHA'
-- 'gcr.io/$PROJECT_ID/product-api:$SHORT_SHA'
-- 'gcr.io/$PROJECT_ID/product-db:$SHORT_SHA'
+- 'gcr.io/$PROJECT_ID/webshop-front:$SHORT_SHA'
 - 'gcr.io/$PROJECT_ID/webshop-vue:$SHORT_SHA'
