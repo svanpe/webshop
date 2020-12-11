@@ -1,0 +1,27 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>List of orders</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+App Version :  <span th:text="${version}"> version </span>
+<table>
+    <thead>
+    <tr>
+        <th> ID </th>
+        <th> customerReference </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:if="${orders.empty}">
+        <td colspan="2"> No orders for the reference</td>
+    </tr>
+    <tr th:each="order : ${orders}">
+        <td><span th:text="${order.id}"> id </span></td>
+        <td><span th:text="${order.customerReference}"> reference </span></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
