@@ -5,7 +5,7 @@ $(document).ready(function() {
 
         data.forEach(function (order) {
 
-            $('.orderTable')
+            $('#orderTable')
                 .append("<tr> <td>" + order.id + "</td><td>" +order.customerReference + "</td></tr>");
 
         });
