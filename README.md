@@ -1,4 +1,4 @@
-# Webshop (POC) 
+# Webshop (POC)      
 This is a trial for training purpose about making an app with spring-boot for REST api's and Kubernetes.
 
 I found a lot of support from the following projects found on the web :
